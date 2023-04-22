@@ -9,12 +9,12 @@ public class Menu extends JPanel
     private final String buttonTitle1 = "Jouer";
     private final String buttonTitle2 = "Règle du jeu";
 
-    private Game game;
+    private Othello othello;
 
-    public Menu(Game g) {
+    public Menu(Othello g) {
         this.setBackground(Color.LIGHT_GRAY);
         this.setLayout(new BorderLayout());
-        this.game = g;
+        this.othello = g;
 
         JButton button1 = new JButton(buttonTitle1);
         JButton button2 = new JButton(buttonTitle2);
@@ -22,7 +22,7 @@ public class Menu extends JPanel
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.navigate(new ChooseLevel(game));
+                othello.navigate(new ChooseLevel(othello));
             }
         });
         button1.setPreferredSize(new Dimension(100, 50));
@@ -30,7 +30,7 @@ public class Menu extends JPanel
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.navigate(new Rules(game));
+                othello.navigate(new Rules(othello));
             }
         });
         JPanel panel = new JPanel(new GridBagLayout());

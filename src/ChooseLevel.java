@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 public class ChooseLevel extends JPanel {
 
-    private Game game;
+    private Othello othello;
 
-    public ChooseLevel(Game g) {
-        this.game = g;
+    public ChooseLevel(Othello g) {
+        this.othello = g;
         this.setBackground(Color.LIGHT_GRAY);
         this.setLayout(new BorderLayout());
         JPanel p = new JPanel(); {
@@ -17,7 +17,7 @@ public class ChooseLevel extends JPanel {
             back.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    game.back();
+                    othello.back();
                 }
             });
             p.add(back);

@@ -5,15 +5,15 @@ import java.awt.event.ActionListener;
 
 public class Rules extends JPanel {
 
-    private Game game;
-    public Rules(Game g) {
-        this.game = g;
+    private Othello othello;
+    public Rules(Othello g) {
+        this.othello = g;
         setLayout(new BorderLayout());
         JButton back = new JButton("Retour");
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.back();
+                othello.back();
             }
         });
         JLabel label = new JLabel("Règle du jeu");

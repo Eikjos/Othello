@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Stack;
 
-public class Game extends JFrame {
+public class Othello extends JFrame {
 
     private Stack<Container> stack;
-    public Game() {
+    public Othello() {
         stack = new Stack<Container>();
         Menu menu = new Menu(this);
         this.add(menu);
@@ -29,6 +29,6 @@ public class Game extends JFrame {
         this.validate();
     }
     public static void main(String[] args) {
-        new Game();
+        new Othello();
     }
 }

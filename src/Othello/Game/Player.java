@@ -1,4 +1,4 @@
-package Game;
+package Othello.Game;
 
 public enum Player {
     White,

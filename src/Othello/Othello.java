@@ -1,3 +1,5 @@
+package Othello;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Stack;
@@ -27,8 +29,5 @@ public class Othello extends JFrame {
         this.setContentPane(container);
         this.invalidate();
         this.validate();
-    }
-    public static void main(String[] args) {
-        new Othello();
     }
 }

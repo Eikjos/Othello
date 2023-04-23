@@ -1,3 +1,7 @@
+package Othello;
+
+import Othello.Game.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,6 +35,27 @@ public class ChooseLevel extends JPanel {
             JButton easy = new JButton("Facile");
             JButton medium = new JButton("Moyen");
             JButton difficult = new JButton("Difficile");
+
+            easy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    othello.navigate(new Game(othello));
+                }
+            });
+
+            medium.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    othello.navigate(new Game(othello));
+                }
+            });
+
+            difficult.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    othello.navigate(new Game(othello));
+                }
+            });
 
             easy.setPreferredSize(d);
             medium.setPreferredSize(d);

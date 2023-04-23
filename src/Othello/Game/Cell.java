@@ -1,4 +1,4 @@
-package Game;
+package Othello.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class Cell extends JButton {
         this.game = g;
         this.playable = false;
         this.player = null;
-        this.setBackground(Color.getHSBColor(131, 43, 32));
+        this.setBackground(Color.decode("#33753C"));
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.addActionListener(new ActionListener() {
             @Override
@@ -45,12 +45,17 @@ public class Cell extends JButton {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
         if (player != null) {
-            int centerX = getWidth() / 2;
-            int centerY = getHeight() / 2;
             int radius = getWidth() / 3;
             g.setColor(player == Player.Black ? Color.BLACK : Color.WHITE);
             g.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
+        } else {
+            if (playable && game.getPlayer() == Player.Black) {
+                g.setColor(Color.decode("#93d29e"));
+                g.fillRect(5, 5, getWidth() - 10, getHeight() - 10);
+            }
         }
     }
 

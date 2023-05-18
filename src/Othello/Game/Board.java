@@ -241,11 +241,11 @@ public class Board extends JPanel {
             coord.add(new Point(i, y));
         }
         // col top
-        i = x + 1;
+        i = x - 1;
         while (cells[i][y].getPlayer() == player && i >= 0) {
             --i;
         }
-        if (cells[i][y].getPlayer() == null && i != x + 1) {
+        if (cells[i][y].getPlayer() == null && i != x - 1) {
             coord.add(new Point(i, y));
         }
         // row right
@@ -257,11 +257,11 @@ public class Board extends JPanel {
             coord.add(new Point(x, i));
         }
         // row left
-        i = y + 1;
+        i = y - 1;
         while (cells[x][i].getPlayer() == player && i >= 0) {
             --i;
         }
-        if (cells[x][i].getPlayer() == null && i != y + 1) {
+        if (cells[x][i].getPlayer() == null && i != y - 1) {
             coord.add(new Point(x, i));
         }
         // diag top-left

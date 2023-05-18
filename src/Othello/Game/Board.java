@@ -234,67 +234,67 @@ public class Board extends JPanel {
         ArrayList<Point> coord = new ArrayList<Point>();
         // col bottom
         int i = x + 1;
-        while (cells[i][y].getPlayer() == player && i < size) {
+        while (i < size && cells[i][y].getPlayer() == player) {
             ++i;
         }
-        if (cells[i][y].getPlayer() == null && i != x + 1) {
+        if (i != x + 1 && cells[i][y].getPlayer() == null) {
             coord.add(new Point(i, y));
         }
         // col top
         i = x - 1;
-        while (cells[i][y].getPlayer() == player && i >= 0) {
+        while (i >= 0 && cells[i][y].getPlayer() == player) {
             --i;
         }
-        if (cells[i][y].getPlayer() == null && i != x - 1) {
+        if (i != x - 1 && i >= 0 && cells[i][y].getPlayer() == null) {
             coord.add(new Point(i, y));
         }
         // row right
         i = y + 1;
-        while (cells[x][i].getPlayer() == player && i < size) {
+        while (i < size && cells[x][i].getPlayer() == player) {
             ++i;
         }
-        if (cells[x][i].getPlayer() == null && i != y + 1) {
+        if (i < size && i != y + 1 && cells[x][i].getPlayer() == null ) {
             coord.add(new Point(x, i));
         }
         // row left
         i = y - 1;
-        while (cells[x][i].getPlayer() == player && i >= 0) {
+        while (i >= 0 && cells[x][i].getPlayer() == player) {
             --i;
         }
-        if (cells[x][i].getPlayer() == null && i != y - 1) {
+        if (i >= 0 && i != y - 1 && cells[x][i].getPlayer() == null) {
             coord.add(new Point(x, i));
         }
         // diag top-left
         i = 1;
-        while (cells[x - i][y - i].getPlayer() == player  && i <= Math.min(x, y)) {
-            --i;
+        while (i <= Math.min(x, y) && x - i >= 0 && y - i >= 0 && cells[x - i][y - i].getPlayer() == player) {
+            ++i;
         }
-        if (cells[x - i][y - i].getPlayer() == null && i != 1) {
-            coord.add(new Point(x - 1, y - 1));
+        if (x - i >= 0 && y - i >= 0 && i != 1 && cells[x - i][y - i].getPlayer() == null) {
+            coord.add(new Point(x - i, y - i));
         }
         // diag top-right
         i = 1;
-        while (cells[x - i][y + i].getPlayer() == player  && i <= Math.min(x, size - 1 - y)) {
-            --i;
+        while (i <= Math.min(x, size - 1 - y) && x - i >= 0 && y + i < size && cells[x - i][y + i].getPlayer() == player) {
+            ++i;
         }
-        if (cells[x - i][y + i].getPlayer() == null && i != 1) {
+        if (x - i >= 0 && y + i < size && i != 1 && cells[x - i][y + i].getPlayer() == null) {
             coord.add(new Point(x - i, y + i));
         }
         // diag bottom-left
         i = 1;
-        while (cells[x + i][y - i].getPlayer() == player  && i <= Math.min(size - 1 - x, y)) {
-            --i;
+        while (i <= Math.min(size - 1 - x, y) && x + i >= 0 && y - i < size && cells[x + i][y - i].getPlayer() == player) {
+            ++i;
         }
-        if (cells[x + i][y - i].getPlayer() == null && i != 1) {
+        if (i != 1 &&cells[x + i][y - i].getPlayer() == null) {
             coord.add(new Point(x + i, y - i));
         }
         // diag bottom-right
         i = 1;
-        while (cells[x + i][y + i].getPlayer() == player  && i <= Math.min(size - 1- x, size - 1 - y)) {
-            --i;
+        while (i <= Math.min(size - 1- x, size - 1 - y) && x + i >= 0 && y + i < size && cells[x + i][y + i].getPlayer() == player) {
+            ++i;
         }
-        if (cells[x + i][y + i].getPlayer() == null && i != 1) {
-            coord.add(new Point(x + i, y - i));
+        if (i != 1 && cells[x + i][y + i].getPlayer() == null) {
+            coord.add(new Point(x + i, y + i));
         }
 
         return coord;

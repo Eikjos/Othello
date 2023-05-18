@@ -41,12 +41,9 @@ public class Minimax {
         Player oplayer = (player == Player.Black) ? Player.White : Player.Black;
         //if terminal reached or depth limit reached evaluate
         if(depth == 0 || Board.getPossibilities(node, player).isEmpty()){
-            //BoardPrinter bpe = new BoardPrinter(node,"Depth : " + depth);
             return evaluateBoard(node, player, oplayer);
         }
-        //if no moves available then forfeit turn
         if((max && !Board.getPossibilities(node, player).isEmpty()) || (!max && !Board.getPossibilities(node, oplayer).isEmpty())){
-            //System.out.println("Forfeit State Reached !");
             return MMAB(node,player,depth-1,!max,alpha,beta);
         }
         int score;

@@ -90,7 +90,6 @@ public class Game extends JPanel {
             finish();
         } else {
             Cell cell = Minimax.solve(board.getCells(), Player.White, level.getDepth());
-            System.out.println(cell.getCoordinate().getX() + " " + cell.getCoordinate().getY());
             board.play(cell.getCoordinate().x, cell.getCoordinate().y, player);
             // au tour de joueur
             player = Player.Black;

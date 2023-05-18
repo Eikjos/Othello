@@ -123,7 +123,7 @@ public class Board extends JPanel {
             }
         }
         // diag top-left
-        for (int i = Math.min(x, y); i >= 0; --i) {
+        for (int i = 1; i <= Math.min(x, y); ++i) {
             if (cells[x - i][y - i].getPlayer() == player) {
                 diagTopLeft = i;
             }
@@ -132,7 +132,7 @@ public class Board extends JPanel {
             }
         }
         // diag top-right
-        for (int i = Math.min(x, size - 1 - y); i >= 0; --i) {
+        for (int i = 1; i <= Math.min(x, size - 1 - y); ++i) {
             if (cells[x - i][y + i].getPlayer() == player) {
                 diagTopRight = i;
             }
@@ -141,7 +141,7 @@ public class Board extends JPanel {
             }
         }
         // diag bottom-left
-        for (int i = Math.min(size - 1 - x, y); i >= 0; --i) {
+        for (int i = 1; i <= Math.min(size - 1 - x, y); ++i) {
             if (cells[x + i][y - i].getPlayer() == player) {
                 diagBottomLeft = i;
             }
@@ -150,7 +150,7 @@ public class Board extends JPanel {
             }
         }
         // diag bottom-right
-        for (int i = Math.min(size - 1- x, size - 1 - y); i >= 0; --i) {
+        for (int i = 1; i <= Math.min(size - 1 - x, size - 1 - y); ++i) {
             if (cells[x + i][y + i].getPlayer() == player) {
                 diagBottomRight = i;
             }
@@ -186,25 +186,25 @@ public class Board extends JPanel {
         }
         // diag top-left
         if (diagTopLeft != -1) {
-            for (int i = 1; i < diagTopLeft; ++i) {
+            for (int i = 1; i <= diagTopLeft; ++i) {
                 cells[x - i][y - i].setPlayer(player);
             }
         }
         // diag top right
         if (diagTopRight != -1) {
-            for (int i = 1; i < diagTopRight; ++i) {
+            for (int i = 1; i <= diagTopRight; ++i) {
                 cells[x - i][y + i].setPlayer(player);
             }
         }
         // diag bottom left
         if (diagBottomLeft != -1) {
-            for (int i = 1; i < diagBottomLeft; ++i) {
+            for (int i = 1; i <= diagBottomLeft; ++i) {
                 cells[x + i][y - i].setPlayer(player);
             }
         }
         // diag bottom right
         if (diagBottomRight != -1) {
-            for (int i = 1; i < diagBottomRight; ++i) {
+            for (int i = 1; i <= diagBottomRight; ++i) {
                 cells[x + i][y + i].setPlayer(player);
             }
         }
@@ -282,18 +282,18 @@ public class Board extends JPanel {
         }
         // diag bottom-left
         i = 1;
-        while (i <= Math.min(size - 1 - x, y) && x + i >= 0 && y - i < size && cells[x + i][y - i].getPlayer() == player) {
+        while (i <= Math.min(size - 1 - x, y) && x + i < size && y - i >= 0 && cells[x + i][y - i].getPlayer() == player) {
             ++i;
         }
-        if (i != 1 &&cells[x + i][y - i].getPlayer() == null) {
+        if (x + i < size && y - i >= 0 && i != 1 && cells[x + i][y - i].getPlayer() == null) {
             coord.add(new Point(x + i, y - i));
         }
         // diag bottom-right
         i = 1;
-        while (i <= Math.min(size - 1- x, size - 1 - y) && x + i >= 0 && y + i < size && cells[x + i][y + i].getPlayer() == player) {
+        while (i <= Math.min(size - 1- x, size - 1 - y) && x + i < size && y + i < size && cells[x + i][y + i].getPlayer() == player) {
             ++i;
         }
-        if (i != 1 && cells[x + i][y + i].getPlayer() == null) {
+        if (i != 1 && x + i < size && y + i < size && cells[x + i][y + i].getPlayer() == null) {
             coord.add(new Point(x + i, y + i));
         }
 

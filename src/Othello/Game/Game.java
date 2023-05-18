@@ -88,14 +88,21 @@ public class Game extends JPanel {
             var a = possibilities.get(0);
             board.getCells()[a.getCoordinate().x][a.getCoordinate().y].setPlayer(player);
             board.play(a.getCoordinate().x, a.getCoordinate().y, player);
-            player = Player.Black;
-            board.refreshPossibilities(player);
+            board.refreshPossibilities(Player.Black);
             refreshScore();
+            possibilities = board.getPossibilities();
+            if (possibilities.isEmpty()) {
+                finish();
+            } else {
+                player = Player.Black;
+            }
         }
     }
 
     public void finish() {
-
+        JOptionPane d = new JOptionPane();
+        d.showMessageDialog(this, "Le joueur " + player + " a gagné la partie",
+                "Partie terminé", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void refreshScore() {

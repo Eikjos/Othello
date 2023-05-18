@@ -15,17 +15,25 @@ public class Cell extends JButton {
 
     private Game game;
 
-    public Cell(Game g) {
+    private Point coordinate;
+
+    public Cell(Game g, int x, int y) {
         this.game = g;
         this.playable = false;
         this.player = null;
+        this.coordinate = new Point(x, y);
         this.setBackground(Color.decode("#33753C"));
         this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (playable && player == null) {
-
+                    // pour l'utilisateur
+                    if (g.getPlayer() == Player.Black) {
+                        var source = (Cell) e.getSource();
+                        source.setPlayer(Player.Black);
+                        g.play(source.getCoordinate().x, source.getCoordinate().y);
+                    }
                 }
             }
         });
@@ -33,13 +41,27 @@ public class Cell extends JButton {
 
     public void setPlayable(boolean isPlayable) {
         if (player != null) {
-            playable = false;
+            this.playable = false;
         }
         this.playable = isPlayable;
+        repaint();
+    }
+
+    public boolean isPlayable() {
+        return playable;
+    }
+
+    public Point getCoordinate() {
+        return coordinate;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void setPlayer(Player player) {
         this.player = player;
+        repaint();
     }
 
     @Override
@@ -52,7 +74,7 @@ public class Cell extends JButton {
             g.setColor(player == Player.Black ? Color.BLACK : Color.WHITE);
             g.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
         } else {
-            if (playable && game.getPlayer() == Player.Black) {
+            if (playable) {
                 g.setColor(Color.decode("#93d29e"));
                 g.fillRect(5, 5, getWidth() - 10, getHeight() - 10);
             }

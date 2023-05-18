@@ -25,6 +25,8 @@ public class Board extends JPanel {
         cells[size / 2][size / 2 - 1].setPlayer(Player.Black);
         cells[size / 2 + 1][size / 2].setPlayable(true);
         cells[size / 2  - 2][size / 2 - 1].setPlayable(true);
+        cells[size / 2 - 1][size / 2 - 2].setPlayable(true);
+        cells[size / 2][size / 2 + 1].setPlayable(true);
     }
 
     public Cell[][] getCells() {

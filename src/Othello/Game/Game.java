@@ -18,7 +18,10 @@ public class Game extends JPanel {
     // Le plateau de jeu
     private Board board;
 
-    public Game(Othello othello) {
+    private Level level;
+
+    public Game(Othello othello, Level level) {
+        this.level = level;
         this.othello = othello;
         this.player = Player.Black;
         this.board = new Board(this);
@@ -82,26 +85,28 @@ public class Game extends JPanel {
         board.refreshPossibilities(player);
         refreshScore();
         var possibilities = board.getPossibilities();
+        // au tour de l'IA
         if (possibilities.isEmpty()) {
             finish();
         } else {
-            var a = possibilities.get(0);
-            board.getCells()[a.getCoordinate().x][a.getCoordinate().y].setPlayer(player);
-            board.play(a.getCoordinate().x, a.getCoordinate().y, player);
-            board.refreshPossibilities(Player.Black);
+            Cell cell = Minimax.solve(board.getCells(), Player.White, level.getDepth());
+            System.out.println(cell.getCoordinate().getX() + " " + cell.getCoordinate().getY());
+            board.play(cell.getCoordinate().x, cell.getCoordinate().y, player);
+            // au tour de joueur
+            player = Player.Black;
+            board.refreshPossibilities(player);
             refreshScore();
             possibilities = board.getPossibilities();
             if (possibilities.isEmpty()) {
                 finish();
-            } else {
-                player = Player.Black;
             }
         }
     }
 
     public void finish() {
+        var p = Integer.parseInt(scoreBlack.getText()) > Integer.parseInt(scoreWhite.getText()) ? Player.Black : Player.White;
         JOptionPane d = new JOptionPane();
-        d.showMessageDialog(this, "Le joueur " + player + " a gagné la partie",
+        d.showMessageDialog(this, "Le joueur " + p + " a gagné la partie",
                 "Partie terminé", JOptionPane.INFORMATION_MESSAGE);
     }
 

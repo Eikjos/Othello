@@ -1,6 +1,7 @@
 package Othello;
 
 import Othello.Game.Game;
+import Othello.Game.Level;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,21 +40,21 @@ public class ChooseLevel extends JPanel {
             easy.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    othello.navigate(new Game(othello));
+                    othello.navigate(new Game(othello, Level.EASY));
                 }
             });
 
             medium.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    othello.navigate(new Game(othello));
+                    othello.navigate(new Game(othello, Level.MEDIUM));
                 }
             });
 
             difficult.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    othello.navigate(new Game(othello));
+                    othello.navigate(new Game(othello, Level.DIFFICULT));
                 }
             });
 

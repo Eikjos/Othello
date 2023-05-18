@@ -13,6 +13,10 @@ public class Board extends JPanel {
 
     private Game game;
 
+    public Board(Cell[][] cells) {
+        this.cells = cells;
+    }
+
     public Board(Game g)
     {
         this.game = g;
@@ -36,7 +40,17 @@ public class Board extends JPanel {
     }
 
     public Cell[][] getCells() {
-        return this.cells;
+        var result = new Cell[size][size];
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                var cell = this.cells[i][j];
+                var newCell = new Cell(cell.getGame(), i, j);
+                newCell.setPlayer(cell.getPlayer());
+                newCell.setPlayable(cell.isPlayable());
+                result[i][j] = newCell;
+            }
+        }
+        return result;
     }
 
     public JPanel display() {
@@ -70,10 +84,6 @@ public class Board extends JPanel {
                 }
             }
         }
-        System.out.println("les possibilité sont :");
-       for (var r : result) {
-           System.out.println(r.getCoordinate().x + "  " + r.getCoordinate().y);
-       }
         return result;
     }
 
@@ -86,6 +96,7 @@ public class Board extends JPanel {
         int diagTopRight = -1;
         int diagBottomLeft = -1;
         int diagBottomRight = -1;
+        cells[x][y].setPlayer(player);
         // col bottom
         for (int i = x + 1; i < size; ++i) {
             if (cells[i][y].getPlayer() == player) {
@@ -218,9 +229,7 @@ public class Board extends JPanel {
         }
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                System.out.println(i + " " + j + " " + cells[i][j].getPlayer() + " " + player);
                 if (cells[i][j].getPlayer() == player) {
-                    System.out.println(checkIsPlayable(i, j, player));
                     for (var points : checkIsPlayable(i, j, player)) {
                         cells[points.x][points.y ].setPlayable(true);
                     }
@@ -237,7 +246,7 @@ public class Board extends JPanel {
         while (i < size && cells[i][y].getPlayer() == player) {
             ++i;
         }
-        if (i != x + 1 && cells[i][y].getPlayer() == null) {
+        if (i != x + 1 && i < size && cells[i][y].getPlayer() == null) {
             coord.add(new Point(i, y));
         }
         // col top
@@ -298,5 +307,19 @@ public class Board extends JPanel {
         }
 
         return coord;
+    }
+
+    public static Cell[][] getNewBoardAfterMove(Cell[][] node, Cell cell, Player player) {
+        var b = new Board(node);
+        b.play(cell.getCoordinate().x, cell.getCoordinate().y, player);
+        var c = b.getCells()[cell.getCoordinate().x][cell.getCoordinate().y];
+        c.setPlayer(player);
+        c.setPlayable(false);
+        return b.getCells();
+    }
+
+    public static List<Cell> getPossibilities(Cell[][] node, Player player) {
+        var b = new Board(node);
+        return b.getPossibilities();
     }
 }

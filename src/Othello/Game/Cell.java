@@ -39,6 +39,10 @@ public class Cell extends JButton {
         });
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     public void setPlayable(boolean isPlayable) {
         if (player != null) {
             this.playable = false;
